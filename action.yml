@@ -15,6 +15,14 @@ inputs:
     description: 'The port to map the 5984 CouchDB port to'
     required: false
     default: 5984
+  couchdb user:
+    description: 'The admin user to create on CouchDB (supported versions only)'
+    required: false
+    default: ''
+  couchdb password:
+    description: 'The admin password to create on CouchDB (supported versions only)'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'

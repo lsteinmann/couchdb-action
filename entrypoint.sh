@@ -14,6 +14,14 @@ case "${COUCHDB_MAJOR_VERSION}" in
     ;;
 esac
 
+if [ -n "${INPUT_COUCHDB_USER}" ]; then
+  EXTRA_OPTS+=(-e "COUCHDB_USER=${INPUT_COUCHDB_USER}")
+fi
+
+if [ -n "${INPUT_COUCHDB_PASSWORD}" ]; then
+  EXTRA_OPTS+=(-e "COUCHDB_PASSWORD=${INPUT_COUCHDB_PASSWORD}")
+fi
+
 echo "Starting Docker container"
 CONTAINER_ID="$(docker run -d -p "${INPUT_COUCHDB_PORT}:5984" ${EXTRA_OPTS[@]} "couchdb:${INPUT_COUCHDB_VERSION}")"
 
