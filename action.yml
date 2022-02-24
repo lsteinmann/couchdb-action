@@ -11,6 +11,10 @@ inputs:
     description: 'Version of CouchDB to use.'
     required: false
     default: 'latest'
+  couchdb port:
+    description: 'The port to map the 5984 CouchDB port to'
+    required: false
+    default: 5984
 runs:
   using: 'docker'
   image: 'Dockerfile'

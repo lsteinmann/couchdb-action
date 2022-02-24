@@ -1,13 +1,14 @@
 # CouchDB GitHub Action
 
-This [GitHub Action](https://github.com/features/actions) sets up a CouchDB database.
-The Erlang query server is enabled.
+This [GitHub Action](https://github.com/features/actions) sets up a CouchDB database using the
+default docker image for the version requested.
 
 # Usage
 
 See [action.yml](action.yml) and [test.yml](.github/workflows/test.yml).
 
 Basic:
+
 ```yaml
 steps:
   - name: Set up CouchDB
@@ -17,7 +18,6 @@ steps:
   - name: Do something
     run: |
       curl http://127.0.0.1:5984/
-
 ```
 
 # Contributions
