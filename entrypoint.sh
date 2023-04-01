@@ -34,6 +34,7 @@ docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/other-db' -X PUT -H 'Conte
 
 # Add test data from file
 echo "Adding test data to rtest database"
+docker exec $CONTAINER_ID mkdir /testdata
 docker cp data/import.json $CONTAINER_ID:/testdata/
 docker exec $CONTAINER_ID ls -R /testdata/
 docker exec $CONTAINER_ID echo "test"
