@@ -15,6 +15,6 @@ jobs:
       run: curl -sS -f http://127.0.0.1:3001/
     - name: See if that worked
       run: | 
-        curl GET http://127.0.0.1:3001/_all_dbs
-        curl -X POST -H "Content-Type: application/json" -d '{ "test": "test" }' http://127.0.0.1:3001/rtest
+        curl -X GET http://127.0.0.1:3001/_all_dbs
         curl -X GET http://127.0.0.1:3001/rtest/_all_docs
+        curl -X POST -H 'Content-Type: application/json' -d '{"selector": {"resource.identifier": "Surveyareal 1"}, "limit": 1}' http://127.0.0.1:3001/rtest/_find
