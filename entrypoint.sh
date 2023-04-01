@@ -29,12 +29,14 @@ docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_replicator' -X PUT -H
 
 # Create rtest database
 echo "Creating rtest + other-db databases"
-docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/rtest' -X PUT -H 'Content-Type: application/json' > /dev/null
-docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/other-db' -X PUT -H 'Content-Type: application/json' > /dev/null
+docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/rtest' -X PUT -H 'Content-Type: application/json'
+docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/other-db' -X PUT -H 'Content-Type: application/json'
 
 # Add test data from file
 echo "Adding test data to rtest database"
 docker cp data/import.json $CONTAINER_ID:/tmp/
-docker exec -v $CONTAINER_ID curl -X POST -H "Content-Type: application/json" -d @/tmp/import.json 'http://127.0.0.1:5984/rtest/_bulk_docs' > /dev/null
+docker exec $CONTAINER_ID ls -R
+docker exec $CONTAINER_ID echo "test"
+docker exec $CONTAINER_ID curl -X POST -H "Content-Type: application/json" -d @/tmp/import.json 'http://127.0.0.1:5984/rtest/_bulk_docs'
 
 echo "CouchDB set up complete"
