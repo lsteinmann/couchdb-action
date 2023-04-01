@@ -42,7 +42,11 @@ docker exec $CONTAINER_ID curl -X POST -H "Content-Type: application/json" -d @/
 
 # Add a user with pwd "hallo"
 echo "Adding user with password"
-docker exec $CONTAINER_ID curl -X PUT "http://127.0.0.1:5984/_node/couchdb@localhost/_config/admins/R" --data-binary '"hallo"'
+docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/_users/org.couchdb.user:R' \
+     -X PUT -H 'Content-Type: application/json' \
+     -d '{"name":"R", "password":"hallo", "roles": [], "type": "user"}'
+docker exec $CONTAINER_ID curl -X PUT 'http://127.0.0.1:5984/_node/_local/_config/admins/R' \
+    -d '"hallo"'
 
 
 echo "CouchDB set up complete"
