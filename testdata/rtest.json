@@ -1,0 +1,88 @@
+{
+    "docs": [
+        {
+            "resource": {
+                "relations": {
+                    "isRecordedIn": [
+                        "15754929-dd98-acfa-bfc2-016b4d5582fe"
+                    ],
+                    "liesWithin": [
+                        "bf06c7b0-dba0-dcfa-6d8e-3b3509fee5b6"
+                    ]
+                },
+                "identifier": "Befund_6",
+                "processor": [
+                    "Henriëtte Sönderßeichen"
+                ],
+                "campaign": [
+                    "2021"
+                ],
+                "id": "02932bc4-22ce-3080-a205-e050b489c0c2",
+                "type": "Layer"
+            },
+            "created": {
+                "user": "Lisa Steinmann",
+                "date": "2021-03-05T20:25:01.920Z"
+            },
+            "modified": [],
+            "_id": "02932bc4-22ce-3080-a205-e050b489c0c2",
+            "_rev": "1-bafe2aead496329eaad1313f84615531",
+            "_revisions": {
+                "start": 1,
+                "ids": [
+                    "bafe2aead496329eaad1313f84615531"
+                ]
+            }
+        },
+        {
+            "resource": {
+                "relations": {
+                    "liesWithin": [
+                        "db7d1f5e-5f51-fae3-512a-ddd14d2aaa87"
+                    ]
+                },
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                524450,
+                                4153821
+                            ],
+                            [
+                                524450,
+                                4153701
+                            ],
+                            [
+                                524512.5563311657,
+                                4153765.160339657
+                            ]
+                        ]
+                    ]
+                },
+                "identifier": "Surveyareal 1",
+                "supervisor": [
+                    "Mahmut Yıldız"
+                ],
+                "processor": [
+                    "Henriëtte Sönderßeichen"
+                ],
+                "id": "031179fb-ac01-6b29-b6fc-b1b486d9bff8",
+                "type": "Survey"
+            },
+            "created": {
+                "user": "Lisa Steinmann",
+                "date": "2021-03-12T14:59:01.297Z"
+            },
+            "modified": [],
+            "_id": "031179fb-ac01-6b29-b6fc-b1b486d9bff8",
+            "_rev": "1-efd36474cc50d1a9de37ea23b0354463",
+            "_revisions": {
+                "start": 1,
+                "ids": [
+                    "efd36474cc50d1a9de37ea23b0354463"
+                ]
+            }
+        }
+    ]
+}
