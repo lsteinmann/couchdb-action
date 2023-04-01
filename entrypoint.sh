@@ -26,3 +26,8 @@ docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_users' -X PUT -H 'Con
 docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_global_changes' -X PUT -H 'Content-Type: application/json' --data '{"id":"_global_changes","name":"_global_changes"}' > /dev/null
 
 docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_replicator' -X PUT -H 'Content-Type: application/json' --data '{"id":"_replicator","name":"_replicator"}' > /dev/null
+
+docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/rtest' -X PUT -H 'Content-Type: application/json' > /dev/null
+
+random_number=$RANDOM
+docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/rtest/' -X POST -H 'Content-Type: application/json' -d '{"name": "Your Name", "random_number": "'"$random_number"'"}' > /dev/null
