@@ -40,4 +40,9 @@ docker cp inst/testdata/import.json $CONTAINER_ID:/testdata/
 #docker exec $CONTAINER_ID echo "test"
 docker exec $CONTAINER_ID curl -X POST -H "Content-Type: application/json" -d @/testdata/import.json 'http://127.0.0.1:5984/rtest/_bulk_docs'
 
+# Add a user with pwd "hallo"
+echo "Adding user with password"
+docker exec $CONTAINER_ID curl -X PUT "http://127.0.0.1:5984/_node/couchdb@localhost/_config/admins/R" --data-binary '"hallo"'
+
+
 echo "CouchDB set up complete"
