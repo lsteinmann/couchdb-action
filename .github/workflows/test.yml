@@ -27,4 +27,4 @@ jobs:
         # create database
         curl -X PUT http://127.0.0.1:3001/test
         # add document
-        curl -X POST -H "Content-Type: application/json" -d "@testdata/test.json" http://127.0.0.1:3001/rtest
+        curl -X POST -H "Content-Type: application/json" -d @testdata/test.json -q http://127.0.0.1:3001/rtest
