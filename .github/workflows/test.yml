@@ -12,7 +12,7 @@ jobs:
     - name: Set up CouchDB
       uses: ./
       with:
-        couchdb version: latest
+        couchdb version: '3'
         couchdb port: 3001
         couchdb user: workflow
         couchdb password: hallo
