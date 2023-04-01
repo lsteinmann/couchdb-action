@@ -2,34 +2,14 @@
 
 set -euo pipefail
 
-COUCHDB_MAJOR_VERSION="${INPUT_COUCHDB_VERSION%%.*}"
-
-echo "Running CouchDB version ${INPUT_COUCHDB_VERSION} (major version ${COUCHDB_MAJOR_VERSION}) on port ${INPUT_COUCHDB_PORT}"
-
-EXTRA_OPTS=()
-
-case "${COUCHDB_MAJOR_VERSION}" in
-  2)
-    EXTRA_OPTS+=(-p 5986:5986)
-    ;;
-esac
-
-if [ -n "${INPUT_COUCHDB_USER}" ]; then
-  EXTRA_OPTS+=(-e "COUCHDB_USER=${INPUT_COUCHDB_USER}")
-fi
-
-if [ -n "${INPUT_COUCHDB_PASSWORD}" ]; then
-  EXTRA_OPTS+=(-e "COUCHDB_PASSWORD=${INPUT_COUCHDB_PASSWORD}")
-fi
-
 echo "Starting Docker container"
-CONTAINER_ID="$(docker run -d -p "${INPUT_COUCHDB_PORT}:5984" ${EXTRA_OPTS[@]} "couchdb:${INPUT_COUCHDB_VERSION}")"
+CONTAINER_ID=$(docker run -d -p "3001:5984" "couchdb:2.3.1")
 
 wait_for_couchdb() {
   echo "Waiting for CouchDB..."
   hostip=$(ip route show | awk '/default/ {print $3}')
 
-  while ! curl -f "http://${hostip}:${INPUT_COUCHDB_PORT}/" &> /dev/null
+  while ! curl -f "http://${hostip}:3001/" &> /dev/null
   do
     echo "."
     sleep 1
@@ -38,10 +18,19 @@ wait_for_couchdb() {
 
 wait_for_couchdb
 
-if [ "${COUCHDB_MAJOR_VERSION}" -gt 1 ]; then
-  # Set up system databases
-  echo "Setting up CouchDB system databases"
-  docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_users' -X PUT -H 'Content-Type: application/json' --data '{"id":"_users","name":"_users"}' > /dev/null
-  docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_global_changes' -X PUT -H 'Content-Type: application/json' --data '{"id":"_global_changes","name":"_global_changes"}' > /dev/null
-  docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_replicator' -X PUT -H 'Content-Type: application/json' --data '{"id":"_replicator","name":"_replicator"}' > /dev/null
-fi
+wait_for_couchdb
+
+# Set up system databases
+echo "Setting up CouchDB system databases"
+
+docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_users' -X PUT -H 'Content-Type: application/json' --data '{"id":"_users","name":"_users"}' > /dev/null
+
+docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_global_changes' -X PUT -H 'Content-Type: application/json' --data '{"id":"_global_changes","name":"_global_changes"}' > /dev/null
+
+docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_replicator' -X PUT -H 'Content-Type: application/json' --data '{"id":"_replicator","name":"_replicator"}' > /dev/null
+
+echo "Creating database"
+docker exec $CONTAINER_ID curl -X PUT "http://127.0.0.1:3001/rtest" > /dev/null
+
+echo "Adding document"
+docker exec $CONTAINER_ID curl -X POST -H "Content-Type: application/json" -d '{ "resource": { "relations": { "isRecordedIn": [ "15754929-dd98-acfa-bfc2-016b4d5582fe" ] }, "identifier": "Befund_6", "processor": [ "Henriëtte Sönderßeichen" ], "id": "02932bc4-22ce-3080-a205-e050b489c0c2" } }' "http://127.0.0.1:3001/rtest" > /dev/null
