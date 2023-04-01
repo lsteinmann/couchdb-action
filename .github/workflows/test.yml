@@ -11,21 +11,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up CouchDB
       uses: ./
-      with:
-        couchdb version: '2.3.1'
-        couchdb port: 3001
     - name: Test that CouchDB can be accessed
       run: curl -sS -f http://127.0.0.1:3001/
-    - name: Create DB and add something
+    - name: See if that worked
       run: | 
-        curl -X PUT http://127.0.0.1:3001/rtest
-        curl -X POST -H "Content-Type: application/json" -d '{ "resource": { "relations": { "isRecordedIn": [ "15754929-dd98-acfa-bfc2-016b4d5582fe" ] }, "identifier": "Befund_6", "processor": [ "Henriëtte Sönderßeichen" ], "id": "02932bc4-22ce-3080-a205-e050b489c0c2" } }' http://127.0.0.1:3001/rtest
-    - name: check
-      run: curl GET http://127.0.0.1:3001/_all_dbs
-    - name: Add data to CouchDB
-      run: |
-        ls -R
-        # create database
-        curl -X PUT http://127.0.0.1:3001/test
-        # add document
-        curl -X POST -H "Content-Type: application/json" -d @testdata/testdata.json -q http://127.0.0.1:3001/rtest
+        curl GET http://127.0.0.1:3001/_all_dbs
+        curl -X POST -H "Content-Type: application/json" -d '{ "test": "test" }' http://127.0.0.1:3001/rtest
+        curl -X GET http://127.0.0.1:3001/rtest/02932bc4-22ce-3080-a205-e050b489c0c2
