@@ -1,0 +1,34 @@
+{
+    "resource": {
+        "relations": {
+            "isRecordedIn": [
+                "15754929-dd98-acfa-bfc2-016b4d5582fe"
+            ],
+            "liesWithin": [
+                "bf06c7b0-dba0-dcfa-6d8e-3b3509fee5b6"
+            ]
+        },
+        "identifier": "Befund_6",
+        "processor": [
+            "Henriëtte Sönderßeichen"
+        ],
+        "campaign": [
+            "2021"
+        ],
+        "id": "02932bc4-22ce-3080-a205-e050b489c0c2",
+        "type": "Layer"
+    },
+    "created": {
+        "user": "Lisa Steinmann",
+        "date": "2021-03-05T20:25:01.920Z"
+    },
+    "modified": [],
+    "_id": "02932bc4-22ce-3080-a205-e050b489c0c2",
+    "_rev": "1-bafe2aead496329eaad1313f84615531",
+    "_revisions": {
+        "start": 1,
+        "ids": [
+            "bafe2aead496329eaad1313f84615531"
+        ]
+    }
+}
