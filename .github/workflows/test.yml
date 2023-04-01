@@ -3,21 +3,17 @@ on:
   push:
     branches:
     - master
-  pull_request:
-    branches:
-    - master
+
 jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: Set up CouchDB
       uses: ./
       with:
         couchdb version: '2.3.1'
         couchdb port: 3001
-        couchdb user: test
-        couchdb password: hallo
     - name: Test that CouchDB can be accessed
       run: curl -sS -f http://127.0.0.1:3001/
     - name: Test that system databases are there
