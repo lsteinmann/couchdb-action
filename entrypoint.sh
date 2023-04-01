@@ -34,7 +34,7 @@ docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/other-db' -X PUT -H 'Conte
 
 # Add test data from file
 echo "Adding test data to rtest database"
-docker cp testdata/rtest.json $CONTAINER_ID:/tmp/
-docker exec $CONTAINER_ID curl -X POST -H 'Content-Type: application/json' -d @/tmp/rtest.json 'http://127.0.0.1:5984/rtest' > /dev/null
+docker cp data/import.json $CONTAINER_ID:/tmp/
+docker exec $CONTAINER_ID curl -X POST -H "Content-Type: application/json" -d @/tmp/import.json 'http://127.0.0.1:5984/rtest/_bulk_docs' > /dev/null
 
 echo "CouchDB set up complete"
