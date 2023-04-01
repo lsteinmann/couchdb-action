@@ -28,8 +28,9 @@ docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_global_changes' -X PU
 docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/_replicator' -X PUT -H 'Content-Type: application/json' --data '{"id":"_replicator","name":"_replicator"}' > /dev/null
 
 # Create rtest database
-echo "Creating rtest database"
+echo "Creating rtest + other-db databases"
 docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/rtest' -X PUT -H 'Content-Type: application/json' > /dev/null
+docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/other-db' -X PUT -H 'Content-Type: application/json' > /dev/null
 
 # Add test data from file
 echo "Adding test data to rtest database"

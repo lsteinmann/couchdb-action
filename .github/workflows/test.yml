@@ -13,8 +13,10 @@ jobs:
       uses: ./
     - name: Test that CouchDB can be accessed
       run: curl -sS -f http://127.0.0.1:3001/
-    - name: See if that worked
+    - name: See if databases exist
+      run: curl -X GET http://127.0.0.1:3001/_all_dbs
+    - name: _all_docs
+      run: curl -X GET http://127.0.0.1:3001/rtest/_all_docs
+    - name: See if things exist
       run: | 
-        curl -X GET http://127.0.0.1:3001/_all_dbs
-        curl -X GET http://127.0.0.1:3001/rtest/_all_docs
-        curl -X POST -H 'Content-Type: application/json' -d '{"selector": {"resource.identifier": "Surveyareal 1"}, "limit": 1}' http://127.0.0.1:3001/rtest/_find
+        curl -X POST -H 'Content-Type: application/json' -d '{ "selector": { "$not": { "resource.id": "" } }, "fields": [ "resource.id", "resource.identifier" ]}' http://127.0.0.1:3001/rtest/_find
