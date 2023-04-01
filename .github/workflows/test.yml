@@ -19,6 +19,4 @@ jobs:
     - name: Test that CouchDB can be accessed
       run: curl -sS -f http://127.0.0.1:3001/
     - name: Test that system databases are there
-      run: curl -sS -f http://127.0.0.1:3001/_users
-    - name: lalala
-      run: curl http://127.0.0.1:3001/_all_dbs
+      run: curl -sS -f http://127.0.0.1:3001/_all_dbs
