@@ -18,7 +18,7 @@ jobs:
       run: curl -sS -f http://127.0.0.1:3001/
     - name: Test that system databases are there
       run: curl -sS -f http://127.0.0.1:3001/_users
-    - name: make db
-      run: curl -X PUT http://127.0.0.1:3001/rtest
-    - name: see if i can add stuff
-      run: curl -X POST -H "Content-Type: application/json" -d '{"identifier": "blablubb", "test": 30}' http://127.0.0.1:3001/rtest
+    - name: make db see if i can add stuff
+      run: | 
+        curl -X PUT http://127.0.0.1:3001/rtest
+        curl -X POST -H "Content-Type: application/json" -d '{"identifier": "blablubb", "test": 30}' http://127.0.0.1:3001/rtest
