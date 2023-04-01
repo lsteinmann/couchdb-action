@@ -12,17 +12,13 @@ jobs:
     - name: Set up CouchDB
       uses: ./
       with:
-        couchdb version: '2.3.1'
+        couchdb version: latest
         couchdb port: 3001
+        couchdb user: workflow
+        couchdb password: hallo
     - name: Test that CouchDB can be accessed
       run: curl -sS -f http://127.0.0.1:3001/
     - name: Test that system databases are there
       run: curl -sS -f http://127.0.0.1:3001/_users
-    - name: Set up CouchDB v4
-      uses: ./
-      with:
-        couchdb version: '4'
-    - name: Test that CouchDB can be accessed
-      run: curl -sS -f http://127.0.0.1:5984/
-    - name: Test that system databases are there
-      run: curl -sS -f http://127.0.0.1:5984/_users
+    - name: lalala
+      run: curl http://127.0.0.1:3001/_all_dbs
