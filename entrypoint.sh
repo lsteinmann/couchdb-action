@@ -33,7 +33,8 @@ docker exec $CONTAINER_ID curl -sS 'http://127.0.0.1:5984/rtest' -X PUT -H 'Cont
 
 # Add test data from file
 echo "Adding test data to rtest database"
-docker cp /testdata/rtest.json $CONTAINER_ID:/tmp/
+echo "The current working directory is $(pwd)"
+docker cp testdata/rtest.json $CONTAINER_ID:/tmp/
 docker exec $CONTAINER_ID curl -sS -X POST -H 'Content-Type: application/json' -d @/tmp/rtest.json 'http://127.0.0.1:5984/rtest' > /dev/null
 
 echo "CouchDB set up complete"
