@@ -12,11 +12,11 @@ jobs:
     - name: Set up CouchDB
       uses: ./
     - name: Test that CouchDB can be accessed
-      run: curl -sS -f http://127.0.0.1:3001/
+      run: curl --user R:hallo -sS -f http://127.0.0.1:3001/
     - name: See if databases exist
-      run: curl -X GET http://127.0.0.1:3001/_all_dbs
+      run: curl --user R:hallo -X GET http://127.0.0.1:3001/_all_dbs
     - name: _all_docs
-      run: curl -X GET http://127.0.0.1:3001/rtest/_all_docs
+      run: curl --user R:hallo -X GET http://127.0.0.1:3001/rtest/_all_docs
     - name: See if things exist
       run: | 
-        curl -X POST -H 'Content-Type: application/json' -d '{ "selector": { "$not": { "resource.id": "" } }, "fields": [ "resource.id", "resource.identifier" ]}' http://127.0.0.1:3001/rtest/_find
+        curl --user R:hallo -X POST -H 'Content-Type: application/json' -d '{ "selector": { "$not": { "resource.id": "" } }, "fields": [ "resource.id", "resource.identifier" ]}' http://127.0.0.1:3001/rtest/_find
