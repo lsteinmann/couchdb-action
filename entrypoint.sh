@@ -33,7 +33,10 @@ docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/rtest' -X PUT -H 'Content-
 docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/anderes-projekt' -X PUT -H 'Content-Type: application/json'
 docker exec $CONTAINER_ID curl 'http://127.0.0.1:5984/test' -X PUT -H 'Content-Type: application/json'
 
+# Change mango find default limit to
 docker exec $CONTAINER_ID curl -X PUT 'http://127.0.0.1:5984/_node/nonode@nohost/_config/mango/default_limit' -H "Content-Type: application/json" -d '"100"'
+echo "Changed mango find default limit to:"
+docker exec $CONTAINER_ID curl -X GET 'http://127.0.0.1:5984/_node/nonode@nohost/_config/mango/default_limit' -H "Content-Type: application/json"
 
 # Add test data from file
 echo "Adding test data to rtest database"
