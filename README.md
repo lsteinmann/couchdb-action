@@ -1,7 +1,9 @@
-# CouchDB GitHub Action
+# CouchDB GitHub Action for testing idaifieldR
 
-This [GitHub Action](https://github.com/features/actions) sets up a CouchDB database using the
-default docker image for the version requested.
+This [GitHub Action](https://github.com/features/actions) sets up a CouchDB v2.3.1 database using the
+default docker image. 
+
+It is a modified version of [joelnb/couchdb-action](https://github.com/joelnb/couchdb-action) that sets up a database structure as used by the [iDAI.field 2 / Field Desktop database](https://github.com/dainst/idai-field) to allow me testing [idaifieldR](https://github.com/lsteinmann/idaifieldR) in a workflow using docs located at "inst/testdata/import.json" in the repository it is run in. Ignore it, is is not useful for anyone else.
 
 # Usage
 
